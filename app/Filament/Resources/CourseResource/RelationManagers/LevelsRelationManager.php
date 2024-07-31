@@ -24,6 +24,16 @@ class LevelsRelationManager extends RelationManager
                 Forms\Components\Select::make('course_id')
                     ->relationship(name: 'course', titleAttribute: 'name')
                     ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(100),
+                        Forms\Components\Textarea::make('description')
+                            ->columnSpanFull(),
+                        Forms\Components\Toggle::make('is_active')
+                            ->required()
+                    ])->createOptionModalHeading('Create Course')
                     ->required()
             ]);
     }

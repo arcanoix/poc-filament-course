@@ -11,6 +11,8 @@ class CourseChart extends ChartWidget
 {
     protected static ?string $heading = 'Course Chart';
 
+    protected static ?int $sort = 2;
+
     protected function getData(): array
     {
         $data = Trend::model(Course::class)
