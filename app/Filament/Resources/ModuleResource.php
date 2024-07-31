@@ -28,9 +28,10 @@ class ModuleResource extends Resource
                     ->maxLength(100),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('level_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('level_id')
+                    ->relationship(name: 'level', titleAttribute: 'name')
+                    ->searchable()
+                    ->required(),
             ]);
     }
 
@@ -40,9 +41,11 @@ class ModuleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('level_id')
+                Tables\Columns\TextColumn::make('level.name')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

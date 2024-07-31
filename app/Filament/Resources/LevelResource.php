@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LevelResource\Pages;
 use App\Filament\Resources\LevelResource\RelationManagers;
+use App\Filament\Resources\LevelResource\RelationManagers\ModulesRelationManager;
 use App\Models\Level;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -26,9 +27,10 @@ class LevelResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\TextInput::make('course_id')
+                Forms\Components\Select::make('course_id')
+                    ->relationship(name: 'course', titleAttribute: 'name')
+                    ->searchable()
                     ->required()
-                    ->numeric(),
             ]);
     }
 
@@ -38,8 +40,7 @@ class LevelResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('course_id')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('course.name')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -67,7 +68,7 @@ class LevelResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ModulesRelationManager::class,
         ];
     }
 
