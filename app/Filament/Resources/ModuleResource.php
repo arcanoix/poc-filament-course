@@ -31,6 +31,12 @@ class ModuleResource extends Resource
                 Forms\Components\Select::make('level_id')
                     ->relationship(name: 'level', titleAttribute: 'name')
                     ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(100),
+                    ])->createOptionModalHeading('Create Level')
                     ->required(),
             ]);
     }
