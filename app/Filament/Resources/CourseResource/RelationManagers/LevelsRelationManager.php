@@ -43,7 +43,11 @@ class LevelsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('nombre')
             ->columns([
-                Tables\Columns\TextColumn::make('nombre')->searchable(),
+                Tables\Columns\TextColumn::make('nombre')
+                ->url(fn ($record) => route('filament.admin.resources.levels.edit', $record->id))
+                ->searchable(),
+                Tables\Columns\TextColumn::make('curso.nombre')
+                ->searchable(),
             ])
             ->filters([
                 //

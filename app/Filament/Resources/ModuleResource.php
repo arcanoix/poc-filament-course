@@ -6,6 +6,7 @@ use App\Filament\Resources\ModuleResource\Pages;
 use App\Filament\Resources\ModuleResource\RelationManagers;
 use App\Models\Module;
 use App\Models\Modulo;
+use App\Models\Nivel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -28,6 +29,7 @@ class ModuleResource extends Resource
                     ->required()
                     ->maxLength(100),
                 Forms\Components\Textarea::make('descripcion')
+                    ->label('Descripción')
                     ->columnSpanFull(),
                 Forms\Components\Select::make('nivel_id')
                     ->relationship(name: 'nivel', titleAttribute: 'nombre')
@@ -63,7 +65,11 @@ class ModuleResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('nivel')
+                    ->label("Nivel")
+                    ->options(Nivel::pluck('nombre', 'id')->toArray())
+                    ->attribute('nivel_id')
+                    ->searchable(),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
