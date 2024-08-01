@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('modulos', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->text('description')->nullable();
-            $table->unsignedBigInteger('level_id');
-            $table->foreign('level_id')->references('id')->on('levels')->onDelete('cascade');
+            $table->string('nombre', 100);
+            $table->text('descripcion')->nullable();
+            $table->unsignedBigInteger('nivel_id');
+            $table->foreign('nivel_id')->references('id')->on('niveles')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('modulos');
     }
 };

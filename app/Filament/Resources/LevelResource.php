@@ -6,6 +6,7 @@ use App\Filament\Resources\LevelResource\Pages;
 use App\Filament\Resources\LevelResource\RelationManagers;
 use App\Filament\Resources\LevelResource\RelationManagers\ModulesRelationManager;
 use App\Models\Level;
+use App\Models\Nivel;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class LevelResource extends Resource
 {
-    protected static ?string $model = Level::class;
+    protected static ?string $model = Nivel::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -24,22 +25,22 @@ class LevelResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('nombre')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\Select::make('course_id')
-                    ->relationship(name: 'course', titleAttribute: 'name')
+                Forms\Components\Select::make('curso_id')
+                    ->relationship(name: 'curso', titleAttribute: 'nombre')
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('nombre')
                             ->required()
                             ->maxLength(100),
-                        Forms\Components\Textarea::make('description')
+                        Forms\Components\Textarea::make('descripcion')
                             ->columnSpanFull(),
-                        Forms\Components\Toggle::make('is_active')
+                        Forms\Components\Toggle::make('estado')
                             ->required()
-                    ])->createOptionModalHeading('Create Course')
+                    ])->createOptionModalHeading('Crear Curso')
                     ->required()
             ]);
     }
@@ -48,9 +49,9 @@ class LevelResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('course.name')
+                Tables\Columns\TextColumn::make('curso.nombre')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

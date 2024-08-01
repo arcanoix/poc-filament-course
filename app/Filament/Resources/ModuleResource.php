@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ModuleResource\Pages;
 use App\Filament\Resources\ModuleResource\RelationManagers;
 use App\Models\Module;
+use App\Models\Modulo;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModuleResource extends Resource
 {
-    protected static ?string $model = Module::class;
+    protected static ?string $model = Modulo::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,20 +24,20 @@ class ModuleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('nombre')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\Textarea::make('descripcion')
                     ->columnSpanFull(),
-                Forms\Components\Select::make('level_id')
-                    ->relationship(name: 'level', titleAttribute: 'name')
+                Forms\Components\Select::make('nivel_id')
+                    ->relationship(name: 'nivel', titleAttribute: 'nombre')
                     ->searchable()
                     ->preload()
                     ->createOptionForm([
-                        Forms\Components\TextInput::make('name')
+                        Forms\Components\TextInput::make('nombre')
                         ->required()
                         ->maxLength(100),
-                    ])->createOptionModalHeading('Create Level')
+                    ])->createOptionModalHeading('Crear Nivel')
                     ->required(),
             ]);
     }
@@ -45,12 +46,12 @@ class ModuleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('level.name')
+                Tables\Columns\TextColumn::make('nivel.nombre')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('descripcion')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

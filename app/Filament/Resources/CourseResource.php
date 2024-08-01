@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers\LevelsRelationManager;
-use App\Models\Course;
+use App\Models\Curso;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 
 class CourseResource extends Resource
 {
-    protected static ?string $model = Course::class;
+    protected static ?string $model = Curso::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -21,12 +21,12 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('nombre')
                     ->required()
                     ->maxLength(100),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\Textarea::make('descripcion')
                     ->columnSpanFull(),
-                Forms\Components\Toggle::make('is_active')
+                Forms\Components\Toggle::make('estado')
                     ->required(),
             ]);
     }
@@ -35,9 +35,9 @@ class CourseResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('nombre')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\IconColumn::make('estado')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

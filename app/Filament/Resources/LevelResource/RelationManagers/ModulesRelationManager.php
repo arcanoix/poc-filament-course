@@ -12,25 +12,27 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ModulesRelationManager extends RelationManager
 {
-    protected static string $relationship = 'modules';
+    protected static string $relationship = 'modulos';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('nombre')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Textarea::make('descripcion')
+                    ->columnSpanFull(),
             ]);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('name')
+            ->recordTitleAttribute('nombre')
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
-                Tables\Columns\TextColumn::make('description')
+                Tables\Columns\TextColumn::make('nombre'),
+                Tables\Columns\TextColumn::make('descripcion')
                     ->searchable(),
             ])
             ->filters([
