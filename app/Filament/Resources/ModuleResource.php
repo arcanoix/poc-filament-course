@@ -21,6 +21,8 @@ class ModuleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Administracion General';
+
     public static function form(Form $form): Form
     {
         return $form

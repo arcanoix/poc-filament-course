@@ -2,11 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LevelResource\Pages;
-use App\Filament\Resources\LevelResource\RelationManagers;
-use App\Filament\Resources\LevelResource\RelationManagers\ModulesRelationManager;
-use App\Models\Level;
-use App\Models\Nivel;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class LevelResource extends Resource
+class UserResource extends Resource
 {
-    protected static ?string $model = Nivel::class;
+    protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -27,23 +25,18 @@ class LevelResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nombre')
+                Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(100),
-                Forms\Components\Select::make('curso_id')
-                    ->relationship(name: 'curso', titleAttribute: 'nombre')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('nombre')
-                            ->required()
-                            ->maxLength(100),
-                        Forms\Components\Textarea::make('descripcion')
-                            ->columnSpanFull(),
-                        Forms\Components\Toggle::make('estado')
-                            ->required()
-                    ])->createOptionModalHeading('Crear Curso')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->email()
                     ->required()
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -51,9 +44,12 @@ class LevelResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nombre')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('curso.nombre')
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -68,7 +64,6 @@ class LevelResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
@@ -81,17 +76,16 @@ class LevelResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ModulesRelationManager::class,
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLevels::route('/'),
-            'create' => Pages\CreateLevel::route('/create'),
-            'view' => Pages\ViewLevel::route('/{record}'),
-            'edit' => Pages\EditLevel::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }
