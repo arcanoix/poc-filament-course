@@ -23,6 +23,8 @@ class LevelResource extends Resource
 
     protected static ?string $navigationGroup = 'Administracion General';
 
+    protected static ?string $modelLabel = 'Niveles';
+
     public static function form(Form $form): Form
     {
         return $form
