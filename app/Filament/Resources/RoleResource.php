@@ -38,7 +38,8 @@ class RoleResource extends Resource
                 Section::make()->schema([
                     TextInput::make('name')
                     ->label('Nombre')
-                    ->required(),
+                    ->required()
+                    ->unique(ignoreRecord: true),
                     Select::make('permissions')
                         ->multiple()
                         ->label("Permisos")

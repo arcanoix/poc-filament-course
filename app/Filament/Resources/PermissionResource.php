@@ -40,11 +40,10 @@ class PermissionResource extends Resource
                     Grid::make(2)->schema([
                         TextInput::make('name')
                             ->label('Nombre')
-                            ->required(),
+                            ->required()->unique(ignoreRecord: true),
                         Select::make('guard_name')
                             ->options(['web' => 'Web', 'api' => 'API'])
-                            ->default(config('filament-spatie-roles-permissions.default_guard_name'))
-                            ->visible(fn () => config('filament-spatie-roles-permissions.should_show_guard', true))
+                            ->default('web')
                             ->live()
                             ->afterStateUpdated(fn (Set $set) => $set('roles', null))
                             ->label('Guardia')
@@ -76,6 +75,7 @@ class PermissionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
@@ -48,9 +48,9 @@ class User extends Authenticatable implements FilamentUser
     }
 
 
-    public function canAccessPanel(\Filament\Panel $panel): bool
+    /* public function canAccessPanel(\Filament\Panel $panel): bool
     {
-        return $this->hasRole('Administrador');
-    }
+        return $this->hasRole(['Administrador', 'Editor']);
+    } */
 
 }

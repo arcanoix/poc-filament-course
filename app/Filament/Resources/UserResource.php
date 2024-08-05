@@ -50,8 +50,6 @@ class UserResource extends Resource
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (Page $livewire) => ($livewire instanceof  CreateUser)),
                     Select::make('roles')->multiple()->preload()->relationship('roles', 'name')
-
-
             ]);
     }
 
@@ -62,7 +60,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
+                    ->searchable()->copyable(),
 
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
