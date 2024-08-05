@@ -6,6 +6,8 @@ use App\Filament\Resources\CourseResource\Pages;
 use App\Filament\Resources\CourseResource\RelationManagers\LevelsRelationManager;
 use App\Models\Curso;
 use Filament\Forms;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,7 +17,7 @@ class CourseResource extends Resource
 {
     protected static ?string $model = Curso::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
 
     protected static ?string $navigationGroup = 'Administracion de Cursos';
 
@@ -23,13 +25,15 @@ class CourseResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nombre')
-                    ->required()
-                    ->maxLength(100),
-                Forms\Components\Textarea::make('descripcion')
-                    ->columnSpanFull(),
-                Forms\Components\Toggle::make('estado')
-                    ->required(),
+                Section::make()->schema([
+                    Forms\Components\TextInput::make('nombre')
+                        ->required()
+                        ->maxLength(100),
+                    Forms\Components\Textarea::make('descripcion')
+                        ->columnSpanFull(),
+                    Forms\Components\Toggle::make('estado')
+                        ->required(),
+                ])
             ]);
     }
 
