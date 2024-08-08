@@ -20,21 +20,7 @@ class LevelsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('nombre')
                     ->required()
-                    ->maxLength(100),
-                Forms\Components\Select::make('curso_id')
-                    ->relationship(name: 'curso', titleAttribute: 'nombre')
-                    ->searchable()
-                    ->preload()
-                    ->createOptionForm([
-                        Forms\Components\TextInput::make('nombre')
-                            ->required()
-                            ->maxLength(100),
-                        Forms\Components\Textarea::make('descripcion')
-                            ->columnSpanFull(),
-                        Forms\Components\Toggle::make('estado')
-                            ->required()
-                    ])->createOptionModalHeading('Crear Curso')
-                    ->required()
+                    ->maxLength(100)
             ]);
     }
 
