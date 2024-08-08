@@ -7,10 +7,12 @@ use App\Filament\Resources\CourseResource\RelationManagers\LevelsRelationManager
 use App\Models\Curso;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 
 class CourseResource extends Resource
@@ -31,8 +33,12 @@ class CourseResource extends Resource
                         ->maxLength(100),
                     Forms\Components\Textarea::make('descripcion')
                         ->columnSpanFull(),
+                        FileUpload::make('imagen')
+                            ->disk('public')
+                            ->directory('form-attachments')
+                            ->visibility('private'),
                     Forms\Components\Toggle::make('estado')
-                        ->required(),
+                        ->required()
                 ])
             ]);
     }
@@ -45,6 +51,7 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\IconColumn::make('estado')
                     ->boolean(),
+                    ImageColumn::make('imagen')->circular(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
