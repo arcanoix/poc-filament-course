@@ -14,7 +14,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole(['Administrador']);
+        return $user->hasRole(['administrador']);
     }
 
     /**
@@ -22,7 +22,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission)
     {
-        return $user->hasRole(['Administrador']);
+       // return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -30,7 +30,7 @@ class PermissionPolicy
      */
     public function create(User $user)
     {
-         return $user->hasRole(['Administrador']);
+       //  return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -38,7 +38,7 @@ class PermissionPolicy
      */
     public function update(User $user, Permission $permission)
     {
-         return $user->hasRole(['Administrador']);
+        // return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -46,7 +46,7 @@ class PermissionPolicy
      */
     public function delete(User $user, Permission $permission)
     {
-         return $user->hasRole(['Administrador']);
+       //  return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -54,7 +54,7 @@ class PermissionPolicy
      */
     public function restore(User $user, Permission $permission)
     {
-         return $user->hasRole(['Administrador']);
+       //  return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -62,6 +62,6 @@ class PermissionPolicy
      */
     public function forceDelete(User $user, Permission $permission)
     {
-         return $user->hasRole(['Administrador']);
+       //  return $user->hasRole(['Administrador']);
     }
 }

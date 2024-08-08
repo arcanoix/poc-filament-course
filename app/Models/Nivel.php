@@ -11,7 +11,7 @@ class Nivel extends Model
 
     protected $table = 'niveles';
 
-    protected $fillable = ['nombre', 'curso_id'];
+    protected $fillable = ['nombre', 'curso_id', 'tipo_nivel_id'];
 
     public function curso()
     {
@@ -21,5 +21,10 @@ class Nivel extends Model
     public function modulos()
     {
         return $this->hasMany(Modulo::class);
+    }
+
+    public function tipoNivel()
+    {
+        return $this->belongsTo(TipoNivel::class);
     }
 }

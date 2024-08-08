@@ -14,7 +14,7 @@ class RolePolicy
      */
     public function viewAny(User $user)
     {
-        return $user->hasRole(['Administrador']);
+        return $user->hasRole(['administrador']);
     }
 
     /**
@@ -30,7 +30,7 @@ class RolePolicy
      */
     public function create(User $user)
     {
-        return $user->hasRole(['Administrador']);
+        //return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -38,7 +38,7 @@ class RolePolicy
      */
     public function update(User $user, Role $role)
     {
-        return $user->hasRole(['Administrador']);
+        //return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -46,7 +46,7 @@ class RolePolicy
      */
     public function delete(User $user, Role $role)
     {
-        return $user->hasRole(['Administrador']);
+        //return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -54,7 +54,7 @@ class RolePolicy
      */
     public function restore(User $user, Role $role)
     {
-        return $user->hasRole(['Administrador']);
+       // return $user->hasRole(['Administrador']);
     }
 
     /**
@@ -62,6 +62,6 @@ class RolePolicy
      */
     public function forceDelete(User $user, Role $role)
     {
-        return $user->hasRole(['Administrador']);
+        //return $user->hasRole(['Administrador']);
     }
 }

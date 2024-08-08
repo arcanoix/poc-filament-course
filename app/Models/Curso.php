@@ -11,7 +11,7 @@ class Curso extends Model
 
     protected $table = 'cursos';
 
-    protected $fillable = ['nombre', 'descripcion', 'estado'];
+    protected $fillable = ['nombre', 'descripcion', 'estado', 'imagen'];
 
     public function niveles()
     {

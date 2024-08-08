@@ -45,6 +45,16 @@ class LevelResource extends Resource
                         Forms\Components\Toggle::make('estado')
                             ->required()
                     ])->createOptionModalHeading('Crear Curso')
+                    ->required(),
+                    Forms\Components\Select::make('tipo_nivel_id')
+                    ->relationship(name: 'tipoNivel', titleAttribute: 'nombre')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nombre')
+                            ->required()
+                            ->maxLength(100),
+                    ])->createOptionModalHeading('Tipo Niveles')
                     ->required()
             ]);
     }

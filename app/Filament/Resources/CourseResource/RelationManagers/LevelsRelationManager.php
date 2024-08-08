@@ -20,7 +20,17 @@ class LevelsRelationManager extends RelationManager
             ->schema([
                 Forms\Components\TextInput::make('nombre')
                     ->required()
-                    ->maxLength(100)
+                    ->maxLength(100),
+                    Forms\Components\Select::make('tipo_nivel_id')
+                    ->relationship(name: 'tipoNivel', titleAttribute: 'nombre')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nombre')
+                            ->required()
+                            ->maxLength(100),
+                    ])->createOptionModalHeading('Tipo Niveles')
+                    ->required()
             ]);
     }
 
