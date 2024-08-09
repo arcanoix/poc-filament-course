@@ -34,9 +34,10 @@ class CourseResource extends Resource
                     Forms\Components\Textarea::make('descripcion')
                         ->columnSpanFull(),
                         FileUpload::make('imagen')
-                            ->disk('public')
-                            ->directory('form-attachments')
-                            ->visibility('private'),
+                            ->label('Subir imagen')
+                            ->directory('courses')
+                            ->disk('azure')
+                            ->directory('form-attachments'),
                     Forms\Components\Toggle::make('estado')
                         ->required()
                 ])
@@ -51,7 +52,9 @@ class CourseResource extends Resource
                     ->searchable(),
                 Tables\Columns\IconColumn::make('estado')
                     ->boolean(),
-                    ImageColumn::make('imagen')->circular(),
+                    ImageColumn::make('imagen')
+                    ->disk('azure')
+                    ->circular(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

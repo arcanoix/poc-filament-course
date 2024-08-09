@@ -55,6 +55,17 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+        'azure' => [
+             'driver'    => 'azure', // As this is the name of the driver, this MUST be set to "azure"
+            'name'      => env('AZURE_STORAGE_NAME'),
+            'key'       => env('AZURE_STORAGE_KEY'),
+            'container' => env('AZURE_STORAGE_CONTAINER'),
+            'url'       => env('AZURE_STORAGE_URL'),
+            'prefix'    => null,
+            'connection_string' => env('AZURE_STORAGE_CONNECTION_STRING')
+        ],
+
+
 
     ],
 
